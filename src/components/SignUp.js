@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { firebaseApp } from '../firebase';
+import { Link } from 'react-router-dom';
 
 class SignUp extends Component {
   state = {
@@ -7,13 +8,19 @@ class SignUp extends Component {
     password: '',
     error: {
       message: ''
-    }
+    },
+    signedUp: false
   }
 
   signUp = () => {
     const email = this.state.email;
     const password = this.state.password;
     firebaseApp.auth().createUserWithEmailAndPassword(email, password)
+    .then(user => {
+      if(user){
+        this.setState({signedUp: true})
+      }
+    })
     .catch(error => {
       console.log('error', error);
       this.setState({error: error})
@@ -21,6 +28,9 @@ class SignUp extends Component {
   }
 
   render() {
+    if(this.state.signedUp){
+      this.props.history.replace('/signin')
+    }
     return (
       <div className="form-inline" style={{margin: '5%'}}>
         <h2>Sign Up</h2>
@@ -48,6 +58,7 @@ class SignUp extends Component {
           </button>
         </div>
         <div>{this.state.error.message}</div>
+        <div><Link to={'/signin'}>Already a user? Sign in instead</Link></div>
       </div>
     );
   }
