@@ -11,13 +11,15 @@ import { Switch, Route } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 import UserReducer from './store/reducers/reducer_user';
 import GoalsReducer from './store/reducers/reducer_goals';
+import CompleteReducer from './store/reducers/reducer_completed';
 import { signedIn } from './store/actions_creators';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootreducer = combineReducers({
   user: UserReducer,
-  goals: GoalsReducer
+  goals: GoalsReducer,
+  completed: CompleteReducer
 });
 
 const store = createStore(rootreducer, composeEnhancers());
