@@ -33,6 +33,7 @@ class CompletedGoals extends Component {
         }
         <button
           className="btn btn-sm btn-primary"
+          style={{marginTop: '5px'}}
           type="button"
           onClick={() => this.clearAll()}>Clear All</button>
       </div>
