@@ -7,12 +7,11 @@ let user = {
 const UserReducer = (state = user, action) => {
   switch(action.type){
     case SIGNED_IN :
-    const email = action.email;
-    user = {
-      email: action.email
-    }
-    return user
-
+      const email = action.email;
+      user = {
+        email
+      }
+      return user;
     default:
     return state;
   }
